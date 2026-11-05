@@ -1,5 +1,7 @@
 # W01 .NET Applications — Submission Notes
 
+working site img: ![alt text](image.png)
+
 The working code is in [`Practice/W01-DotNetApplications`](./Practice/W01-DotNetApplications/):
 
 - `ContosoPizza` is the .NET 8 ASP.NET Core controller API.
