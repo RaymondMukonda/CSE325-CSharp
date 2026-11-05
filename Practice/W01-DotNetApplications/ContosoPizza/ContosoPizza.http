@@ -1,0 +1,43 @@
+@ContosoPizza_HostAddress = http://localhost:5259
+
+### Get the seeded pizzas
+GET {{ContosoPizza_HostAddress}}/pizza
+Accept: application/json
+
+### Get a pizza by ID
+GET {{ContosoPizza_HostAddress}}/pizza/1
+Accept: application/json
+
+### Get a missing pizza (expected 404)
+GET {{ContosoPizza_HostAddress}}/pizza/99
+Accept: application/json
+
+### Create a pizza (expected 201 Created and a Location header)
+POST {{ContosoPizza_HostAddress}}/pizza
+Content-Type: application/json
+
+{
+  "name": "Hawaii",
+  "isGlutenFree": false
+}
+
+### Update the created pizza (expected 204 No Content)
+PUT {{ContosoPizza_HostAddress}}/pizza/4
+Content-Type: application/json
+
+{
+  "id": 4,
+  "name": "Hawaiian",
+  "isGlutenFree": false
+}
+
+### Confirm the updated pizza
+GET {{ContosoPizza_HostAddress}}/pizza/4
+Accept: application/json
+
+### Delete the created pizza (expected 204 No Content)
+DELETE {{ContosoPizza_HostAddress}}/pizza/4
+
+### Confirm a deleted pizza returns 404
+GET {{ContosoPizza_HostAddress}}/pizza/4
+Accept: application/json

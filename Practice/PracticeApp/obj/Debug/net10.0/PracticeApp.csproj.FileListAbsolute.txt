@@ -1,0 +1,15 @@
+C:\Users\Raymond\Desktop\CSE325-CSharp\Practice\PracticeApp\bin\Debug\net10.0\PracticeApp.exe
+C:\Users\Raymond\Desktop\CSE325-CSharp\Practice\PracticeApp\bin\Debug\net10.0\PracticeApp.deps.json
+C:\Users\Raymond\Desktop\CSE325-CSharp\Practice\PracticeApp\bin\Debug\net10.0\PracticeApp.runtimeconfig.json
+C:\Users\Raymond\Desktop\CSE325-CSharp\Practice\PracticeApp\bin\Debug\net10.0\PracticeApp.dll
+C:\Users\Raymond\Desktop\CSE325-CSharp\Practice\PracticeApp\bin\Debug\net10.0\PracticeApp.pdb
+C:\Users\Raymond\Desktop\CSE325-CSharp\Practice\PracticeApp\obj\Debug\net10.0\PracticeApp.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Raymond\Desktop\CSE325-CSharp\Practice\PracticeApp\obj\Debug\net10.0\PracticeApp.AssemblyInfoInputs.cache
+C:\Users\Raymond\Desktop\CSE325-CSharp\Practice\PracticeApp\obj\Debug\net10.0\PracticeApp.AssemblyInfo.cs
+C:\Users\Raymond\Desktop\CSE325-CSharp\Practice\PracticeApp\obj\Debug\net10.0\PracticeApp.csproj.CoreCompileInputs.cache
+C:\Users\Raymond\Desktop\CSE325-CSharp\Practice\PracticeApp\obj\Debug\net10.0\PracticeApp.sourcelink.json
+C:\Users\Raymond\Desktop\CSE325-CSharp\Practice\PracticeApp\obj\Debug\net10.0\PracticeApp.dll
+C:\Users\Raymond\Desktop\CSE325-CSharp\Practice\PracticeApp\obj\Debug\net10.0\refint\PracticeApp.dll
+C:\Users\Raymond\Desktop\CSE325-CSharp\Practice\PracticeApp\obj\Debug\net10.0\PracticeApp.pdb
+C:\Users\Raymond\Desktop\CSE325-CSharp\Practice\PracticeApp\obj\Debug\net10.0\PracticeApp.genruntimeconfig.cache
+C:\Users\Raymond\Desktop\CSE325-CSharp\Practice\PracticeApp\obj\Debug\net10.0\ref\PracticeApp.dll
