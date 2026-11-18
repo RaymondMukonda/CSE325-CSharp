@@ -1,0 +1,159 @@
+@using System.Drawing
+@using ConnectFour.Models
+
+<HeadContent>
+    <style>
+        :root {
+            --board-bg: @ColorTranslator.ToHtml(BoardColor);
+            --player1: @ColorTranslator.ToHtml(Player1Color);
+            --player2: @ColorTranslator.ToHtml(Player2Color);
+        }
+    </style>
+</HeadContent>
+
+<section class="game" aria-label="Connect Four game">
+    <header class="game-header">
+        <div>
+            <h1>Connect Four</h1>
+            <p class="status" aria-live="polite">@StatusMessage</p>
+        </div>
+        <button class="reset-button" type="button" @onclick="State.ResetRound">
+            New round
+        </button>
+    </header>
+
+    <div class="scoreboard" aria-label="Match score">
+        <span><strong>Player 1:</strong> @State.Player1Wins</span>
+        <span><strong>Player 2:</strong> @State.Player2Wins</span>
+    </div>
+    <div class="streaks" aria-label="Consecutive wins">
+        <span>Player 1 streak: @State.Player1Streak</span>
+        <span>Player 2 streak: @State.Player2Streak</span>
+    </div>
+
+    <nav class="column-controls" aria-label="Choose a column">
+        @for (var column = 0; column < GameState.Width; column++)
+        {
+            var selectedColumn = column;
+            <button type="button"
+                    aria-label="@($"Drop piece in column {selectedColumn + 1}")"
+                    disabled="@(_isGameOver || State.IsColumnFull(selectedColumn))"
+                    @onclick="() => State.PlayPiece(selectedColumn)">
+                ↓
+            </button>
+        }
+    </nav>
+
+    <div class="board" role="grid" aria-label="Connect Four board">
+        @for (var index = 0; index < State.Board.Length; index++)
+        {
+            var piece = State.Board[index];
+            var playerClass = piece == 1 ? "player1" : piece == 2 ? "player2" : "";
+            <span class="container" role="gridcell" aria-label="@GetCellLabel(index, piece)">
+                <span class="@playerClass"></span>
+            </span>
+        }
+    </div>
+
+    <div class="game-details">
+        <div>
+            <h2>Customize colors</h2>
+            <label>
+                Board
+                <input type="color"
+                       value="@ToHex(BoardColor)"
+                       @onchange="ChangeBoardColor"
+                       aria-label="Board color" />
+            </label>
+            <label>
+                Player 1
+                <input type="color"
+                       value="@ToHex(Player1Color)"
+                       @onchange="ChangePlayer1Color"
+                       aria-label="Player 1 color" />
+            </label>
+            <label>
+                Player 2
+                <input type="color"
+                       value="@ToHex(Player2Color)"
+                       @onchange="ChangePlayer2Color"
+                       aria-label="Player 2 color" />
+            </label>
+        </div>
+
+        <div class="history">
+            <h2>Moves this round</h2>
+            @if (State.MoveHistory.Count == 0)
+            {
+                <p>No moves yet.</p>
+            }
+            else
+            {
+                <ol>
+                    @foreach (var move in State.MoveHistory)
+                    {
+                        <li>@move</li>
+                    }
+                </ol>
+            }
+            <button class="reset-button secondary" type="button" @onclick="State.ResetMatch">
+                Reset match
+            </button>
+        </div>
+    </div>
+</section>
+
+@code {
+    [Parameter]
+    public Color BoardColor { get; set; } = Color.Yellow;
+
+    [Parameter]
+    public Color Player1Color { get; set; } = Color.Red;
+
+    [Parameter]
+    public Color Player2Color { get; set; } = Color.Blue;
+
+    private GameState State { get; } = new();
+
+    private bool _isGameOver => State.Winner != 0 || State.IsDraw;
+
+    private string StatusMessage =>
+        State.Winner != 0
+            ? $"Player {State.Winner} wins!"
+            : State.IsDraw
+                ? "The round is a draw."
+                : $"Player {State.CurrentPlayer}'s turn";
+
+    private static string ToHex(Color color)
+    {
+        return $"#{color.R:X2}{color.G:X2}{color.B:X2}";
+    }
+
+    private void ChangeBoardColor(ChangeEventArgs args)
+    {
+        BoardColor = FromHex(args.Value?.ToString());
+    }
+
+    private void ChangePlayer1Color(ChangeEventArgs args)
+    {
+        Player1Color = FromHex(args.Value?.ToString());
+    }
+
+    private void ChangePlayer2Color(ChangeEventArgs args)
+    {
+        Player2Color = FromHex(args.Value?.ToString());
+    }
+
+    private static Color FromHex(string? value)
+    {
+        return ColorTranslator.FromHtml(string.IsNullOrWhiteSpace(value) ? "#000000" : value);
+    }
+
+    private static string GetCellLabel(int index, int piece)
+    {
+        var row = (index / GameState.Width) + 1;
+        var column = (index % GameState.Width) + 1;
+        var occupant = piece == 0 ? "empty" : $"occupied by Player {piece}";
+        return $"Row {row}, column {column}, {occupant}";
+    }
+}
